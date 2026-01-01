@@ -1,14 +1,14 @@
-# Zirvium DisplayJet: Zero-Trust Kernel-Level Display Driver Architecture
+# DisplayJet: Zero-Trust Kernel-Level Display Driver Architecture
 
 **Technical Whitepaper v1.0**  
 **Date:** January 2026  
-**Author:** Zirvium Security Research Team
+**Author:** Gautham Nair 
 
 ---
 
 ## Abstract
 
-Zirvium DisplayJet is a revolutionary kernel-level display driver solution that implements a zero-trust security model for graphical content rendering and inter-process visual data access. By leveraging encrypted memory allocation, one-time cryptographic keys, and kernel-mediated access control with user verification, DisplayJet establishes an unprecedented security paradigm for display server technology. This whitepaper presents the technical architecture, cryptographic protocols, and security mechanisms that enable DisplayJet to prevent unauthorized screen capture, content injection, and visual data exfiltration attacks.
+DisplayJet proposes a kernel-level display driver architecture that implements a zero-trust security model for graphical content rendering and inter-process visual data access. By leveraging encrypted memory allocation, one-time cryptographic keys, and kernel-mediated access control with user verification, this architecture addresses critical vulnerabilities in modern display systems. This whitepaper presents the technical architecture, cryptographic protocols, and security mechanisms that enable prevention of unauthorized screen capture, content injection, and visual data exfiltration attacks.
 
 ---
 
@@ -16,7 +16,7 @@ Zirvium DisplayJet is a revolutionary kernel-level display driver solution that 
 
 ### 1.1 Problem Statement
 
-Modern display servers (X11, Wayland, Windows DWM) operate on implicit trust models where applications can often access or capture content from other applications with minimal restrictions. This architectural vulnerability enables:
+Modern display servers (X11, Wayland, and proprietary compositors) operate on implicit trust models where applications can often access or capture content from other applications with minimal restrictions. This architectural vulnerability enables:
 
 - **Unauthorized screen capture** by malicious applications
 - **Visual keylogging** and credential harvesting
@@ -26,7 +26,7 @@ Modern display servers (X11, Wayland, Windows DWM) operate on implicit trust mod
 
 ### 1.2 Solution Overview
 
-Zirvium DisplayJet introduces a **kernel-enforced, zero-trust display architecture** where:
+DisplayJet introduces a **kernel-enforced, zero-trust display architecture** where:
 
 1. Each application's visual content resides in **isolated, encrypted memory regions**
 2. All inter-process display access requests are **mediated by the kernel**
@@ -148,10 +148,10 @@ The SUPS ensures unforgeable user interaction:
 │ ⚠️  SECURE KERNEL PROMPT - DisplayJet                      │
 │════════════════════════════════════════════════════════════│
 │                                                            │
-│  Application "screen-recorder.exe" requests access to:    │
+│  Application "screen-recorder" requests access to:        │
 │                                                            │
 │  ┌──────────────────────────────────────────────────────┐ │
-│  │  "secure-banking-app.exe" - Window Contents          │ │
+│  │  "secure-banking-app" - Window Contents              │ │
 │  └──────────────────────────────────────────────────────┘ │
 │                                                            │
 │  Verified Code Signature: ❌ UNVERIFIED                   │
@@ -328,7 +328,7 @@ The EKMS generates and manages single-use decryption keys:
 - [ ] Multi-monitor support with per-display policies
 - [ ] Remote desktop security extensions
 - [ ] Hardware DRM integration for protected content
-- [ ] Windows and macOS driver ports
+- [ ] Cross-platform driver implementations
 
 ---
 
@@ -374,8 +374,8 @@ The EKMS generates and manages single-use decryption keys:
 
 ## 7. Comparison with Existing Solutions
 
-| Feature | X11 | Wayland | Windows DWM | DisplayJet |
-|---------|-----|---------|-------------|------------|
+| Feature | X11 | Wayland | Traditional Systems | DisplayJet |
+|---------|-----|---------|---------------------|------------|
 | Framebuffer Encryption | ❌ | ❌ | ❌ | ✅ |
 | Per-Process Memory Isolation | ❌ | Partial | Partial | ✅ |
 | User-Mediated Access Control | ❌ | Limited | Limited | ✅ |
@@ -484,9 +484,9 @@ Security researchers are encouraged to report vulnerabilities:
 
 ## 11. Conclusion
 
-Zirvium DisplayJet represents a paradigm shift in display server security architecture. By implementing kernel-level encryption, ephemeral access keys, and user-mediated zero-trust access control, DisplayJet addresses fundamental vulnerabilities in modern graphical systems.
+DisplayJet represents a fundamental rethinking of display server security architecture. By implementing kernel-level encryption, ephemeral access keys, and user-mediated zero-trust access control, this architecture addresses critical vulnerabilities present in current graphical systems that have persisted for decades.
 
-The architecture provides:
+The proposed solution provides:
 
 ✅ **Cryptographic isolation** of visual content  
 ✅ **User sovereignty** over data access  
@@ -495,7 +495,7 @@ The architecture provides:
 ✅ **Minimal performance overhead** through optimization  
 ✅ **Backward compatibility** with existing applications  
 
-As visual data exfiltration attacks grow more sophisticated, DisplayJet offers a proven defense against unauthorized screen capture, content injection, and privacy violations. The project invites collaboration from security researchers, kernel developers, and industry partners to build the next generation of secure display technology.
+As visual data exfiltration attacks grow more sophisticated, this zero-trust display architecture offers a comprehensive defense against unauthorized screen capture, content injection, and privacy violations. The approach is platform-agnostic and can be adapted to various operating systems, making it a viable solution for enterprise, government, healthcare, and privacy-conscious computing environments where visual data security is paramount.
 
 ---
 
@@ -514,20 +514,13 @@ As visual data exfiltration attacks grow more sophisticated, DisplayJet offers a
 
 ---
 
-## 13. Contact & Resources
+## 13. Acknowledgments
 
-**Project Website:** https://displayjet.zirvium.org  
-**Source Code:** https://github.com/zirvium/displayjet  
-**Mailing List:** displayjet-dev@zirvium.org  
-**Security Contact:** security@zirvium.org  
-
-**Commercial Inquiries:** enterprise@zirvium.org  
-**Research Collaboration:** research@zirvium.org  
+This research builds upon decades of work in secure display systems, trusted computing, and cryptographic protocols. We acknowledge the contributions of the open-source security community, hardware security researchers, and display server developers whose prior work has informed this architecture.
 
 ---
 
 **Document Version:** 1.0  
 **Last Updated:** January 1, 2026  
-**Document Hash (SHA-256):** `7f8a4e9c2b1d6a3f5e8c9d0a4b7e1f2c3d4a5b6e7f8a9b0c1d2e3f4a5b6c7d8e`
 
-© 2026 Zirvium Security Research. This document may be freely distributed under CC BY-SA 4.0 license.
+This document is released under CC BY-SA 4.0 license for academic and research purposes.
